@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width",initial-scale=1.0>
+    <title>会員登録</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link th:href="@{/stylesheet.css}" rel="stylesheet">
+</head>
+
+<body>
+<header class="border_header">
+    <div class="row">
+        <!-- 左から、ヘッダーの[pc 〜 スマホ]毎の配分 -->
+        <div class="col-lg-10 col-md-9 col-sm-8">
+            <h1>野村書店</h1>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 d-flex align-items-center">
+            <a th:href="@{/login}">ログインページに戻る</a>
+        </div>
+    </div>
+</header>
+
+<br>
+<p>&nbsp;&nbsp;以下の項目をご入力ください。</p>
+<div class="message" th:text="${message}"></div>
+<br>
+
+<div class="body">
+    <div class="usercreate_body">
+        <form method="post" action="/userconsent">
+            <label for="id">ID</label><span class="required">必須</span>
+            <input id="id" type="text" name="userid" pattern="[0-9A-Za-z]{6,32}" required><span class="example">半角英数6～32文字</span>
+            <br>
+            <label for="pw">パスワード</label><span class="required">必須</span>
+            <input id="pw" type="password" name="userpw" pattern="[0-9A-Za-z]{6,32}" required><span class="example">半角英数6～32文字</span>
+            <br>
+            <label for="sei">姓</label><span class="required">必須</span>
+            <input id="sei" type="text" name="sei" required><span class="example">野村</span>
+            <br>
+            <label for="mei">名</label><span class="required">必須</span>
+            <input id="mei" type="text" name="mei" required><span class="example">太朗</span>
+            <br>
+            <label for="seif">せい</label><span class="required">必須</span>
+            <input id="seif" type="text" name="seif" required><span class="example">のむら</span>
+            <br>
+            <label for="meif">めい</label><span class="required">必須</span>
+            <input id="meif" type="text" name="meif" required><span class="example">たろう</span>
+            <br>
+            <label for="zipcode">郵便番号</label><span class="required">必須</span>
+            <input id="zipcode" type="number" name="zipcode" pattern="[0-9]+" required><span class="example">例:0001111　半角数字ハイフン無し</span>
+            <br>
+            <label for="address">住所</label><span class="required">必須</span>
+            <input id="address" type="text" name="address" required><span class="example">例:東京都板橋区〇〇丁目〇〇-〇〇 ××タワー〇〇〇号室</span>
+            <br>
+            <label for="tel">電話番号</label><span class="required">必須</span>
+            <input id="tel" type="tel" name="tel" pattern="[0-9]+" required><span class="example">例:00011112222　半角数字ハイフン無し</span>
+            <br>
+            <label for="mail">メールアドレス</label><span class="required">必須</span>
+            <input id="mail" type="email" name="mail" required><span class="example"></span>
+            <br>
+            <br>
+            <div class="inline_box">
+                〇個人情報の利用目的・取り扱いについて<br>
+                <br>
+                弊社、野村書店株式会社では、お預かりした個人情報について、<br>
+                以下のとおり適正かつ安全に管理・運用することに努めます。<br>
+                <br>
+                １．利用目的<br>
+                当社は、収集した個人情報について、以下の目的のために利用いたします。<br>
+                ①商品発送やサービス実施、およびアフターサービスのため<br>
+                ②資料請求に対する発送のため<br>
+                ③相談・お問い合わせへの回答のため<br>
+                ④商品・サービス・イベントの案内のため<br>
+                <br>
+                ２．第三者提供<br>
+                当社は、以下の場合を除いて、個人データを第三者へ提供することはしません。<br>
+                ①法令に基づく場合<br>
+                ②人の生命・身体・財産を保護するために必要で、本人から同意を得ることが難しい場合<br>
+                ③公衆衛生の向上・児童の健全な育成のために必要で、本人から同意を得ることが難しい場合<br>
+                ④国の機関や地方公共団体、その委託者などによる法令事務の遂行にあたって協力する必要があり、<br>
+                かつ本人の同意を得ることで事務遂行に影響が生じる可能性がある場合<br>
+                <br>
+                ３．開示請求<br>
+                貴殿の個人情報について、ご本人には、開示・訂正・削除・利用停止を請求する権利があります。<br>
+                手続きにあたっては、ご本人確認のうえ対応させていただきますが、代理人の場合も可能です<br>
+            </div>
+            <br>
+            <input id="consentcheckbox" type="checkbox">
+            <label for="consentcheckbox">同意する</label>
+            <button id="consentbutton" type="submit" disabled>入力内容の確認へ</button>
+        </form>
+    </div>
+</div>
+<footer>&copyNomuraBook.</footer>
+</body>
+<script>
+    //同意するにチェックが有ればボタン押下可、無ければ不可
+
+    //チェックボックスを取得
+    var checkbox = document.getElementById("consentcheckbox");
+    //送信ボタンを取得
+    var button = document.getElementById("consentbutton");
+
+    //チェックボックスをクリック
+    checkbox.addEventListener("click", () => {
+        //チェックされている場合
+        if (checkbox.checked == true){
+            button.disabled = false; //変更(disabled)可
+        }
+        //チェックされていない場合
+        else{
+            button.disabled = true; //変更(disabled)不可
+        }
+    }
+    );
+</script>
+</html>

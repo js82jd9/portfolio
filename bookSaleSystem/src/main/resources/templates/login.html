@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width",initial-scale=1.0>
+    <title>ログイン</title>
+    <link th:href="@{/stylesheet.css}" rel="stylesheet">
+</head>
+
+<body>
+<header class="border_header">
+    <h1>野村書店</h1>
+</header>
+
+<div class="body">
+    <div class="login_body_h2">
+        <h2>○会員登録されているお客様はこちら○</h2>
+        <div class="message" th:text="${message}"></div>
+        <br>
+        <form method="post" action="/userlogin">
+            <label for="id">ID</label>
+            <input id="id" type="text" name="userid" required>
+            <br>
+            <label for="pw">パスワード</label>
+            <input id="pw" type="password" name="userpw" required>
+            <br>
+            <button type="submit">ログイン</button>
+        </form>
+    </div>
+
+    <div class="login_body_h2">
+        <h2>○新規会員登録されるお客様はこちら○</h2>
+        <form action="/usercreate">
+            <button type="submit">会員登録</button>
+        </form>
+    </div>
+
+    <div class="login_body_h2">
+        <h2>○会員登録せずにご購入されるお客様はこちら○</h2>
+        <form action="/top">
+            <button type="submit">トップページ</button>
+        </form>
+    </div>
+</div>
+
+<footer>&copyNomuraBook.</footer>
+</body>
+</html>
