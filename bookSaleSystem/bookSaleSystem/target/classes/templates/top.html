@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width",initial-scale=1.0>
+    <title>トップ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link th:href="@{/stylesheet.css}" rel="stylesheet">
+</head>
+
+<body id="body">
+<header class="border_header">
+    <div class="row">
+        <!-- 左から、ヘッダーの[pc 〜 スマホ]毎の配分 -->
+        <div class="col-lg-8 col-md-6 col-sm-6 col-xs-6">
+            <h1>野村書店</h1>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 d-flex align-items-center">
+            <!-- ユーザがゲスト時の表示 -->
+            <div th:if="${session.users == null}">
+                <span class="header_username">ようこそ！ ゲスト 様</span>
+                <a th:href="@{/login}" class="header_item">ログイン</a>
+            </div>
+            <span th:if="${session.users == null}" class="partition"></span> <!-- 仕切り表示 -->
+            <!-- ユーザがログイン時の表示 -->
+            <div th:if="${session.users != null}">
+                <div class="header_username">
+                お帰りなさい！ <span th:text="${session.users.getSei + ' ' + session.users.getMei}"></span> 様
+                </div>
+            </div>
+            <span th:if="${session.users != null}" class="partition"></span> <!-- 仕切り表示 -->
+            <form id="userlogoutform" action="/userlogout">
+                <button id="userlogoutbtn" class="header_button">ログアウト</button>
+            </form>
+            <span class="partition"></span> <!-- 仕切り表示 -->
+            <form id="cartform" action="/cartitemlist" class="header_item">
+                <a id="carticon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </svg></a>
+            </form>
+        </div>
+    </div>
+</header>
+
+<div class="body">
+    <br>
+    <br>
+    <form method="get" action="/itemsearch">
+        <p>検索したい商品名を入力してください。部分一致検索も可能です</p>
+        <p>空欄のまま検索すると、全商品が表示されます</p>
+        <br>
+        <label for="itemnamekey">商品名検索</label>
+        <input id="itemnamekey" name="itemnamekey" type="search">
+        <button type="submit">検索</button>
+    </form>
+    <br>
+    <div class="message" th:text="${message}"></div>
+</div>
+
+<footer>&copyNomuraBook.</footer>
+</body>
+<script>
+    //ログアウトボタンの押下処理
+    const btn = document.getElementById('userlogoutbtn');
+
+    //ログアウトボタン(btn)をクリック(click)した際、formのaction(event)を呼び出し
+    btn.addEventListener('click',function(event) {
+        var ans = window.confirm("ログアウトしますか？");
+        if(ans === true){
+          window.confirm("ログアウトします"); //eventを実行
+        }else {
+          event.preventDefault(); //eventをキャンセル
+          window.confirm("キャンセルします");
+        }
+    })
+
+    //======================================================
+
+    //カートアイコンをクリックすると、[cartitemlist.html]に遷移する
+    const form = document.getElementById('cartform');
+    const cart = document.getElementById('carticon');
+
+    cart.addEventListener('click',function(event){
+        form.submit();
+    })
+</script>
+</html>

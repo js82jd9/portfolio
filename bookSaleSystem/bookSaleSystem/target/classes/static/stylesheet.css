@@ -1,0 +1,242 @@
+/* ヘッダー用フォント */
+@import url('https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap');
+
+/* リセットcss */
+*{
+    margin:0;
+    padding:0;
+}
+
+html{
+    position:relative;/*footerの相対位置*/
+    min-height:100vh;/*最低高さを画面に合わせる*/
+}
+
+/* 背景画像を使用する場合、[body]要素に[id="body"]を指定 */
+#body{
+    background-image:url("./image/backgroundz_image.png");
+    background-size:cover;
+    background-color:rgba(255,255,255,0.3);/*背景画像の透過度設定*/
+    background-blend-mode:lighten;/*背景画像の透過度設定*/
+}
+
+/* ヘッダー、フッターを除くbody要素 */
+.body{
+    text-align:center;
+}
+
+/* ==========h要素、p要素など======================================== */
+
+.login_body_h2{
+    padding-top:60px;
+}
+
+/* エラーメッセージ用 */
+.message{
+    color:red;
+    font-weight:bold;
+    text-align:center;
+}
+
+/* ユーザ入力ページの入力例表示 */
+.example{
+    color:#c0c0c0;
+    font-size:15px;
+}
+
+/* ヘッダー内リンク要素の仕切り用 */
+.partition{
+    margin-right:6px; /* 仕切りの間隔 */
+    border-left:1px solid; /* 仕切りの境界線 */
+    height:30px; /* 仕切りの高さ */
+}
+
+/* ==========リンク系======================================== */
+
+/* a(訪問前),a:visited(訪問後) */
+a,a:visited{
+    text-decoration:none;
+    color:black;
+}
+
+a:hover{
+    font-weight:bold;
+    cursor:pointer;
+}
+
+a{
+    display:inline-block
+}
+
+/* ==========ラベル系======================================== */
+
+/* 均等に横並び */
+.login_body_h2 label,.usercreate_body label{
+    display:inline-block;
+    width:150px;
+}
+/* 均等に横並び */
+.usercreate_body .example{
+    display:inline-block;
+    text-align:left;
+    width:400px;
+}
+
+label{
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+/* ==========ボタン系======================================== */
+
+.login_body_h2 button{
+    margin-top:20px;
+    padding:0px 20px;
+}
+
+.userconsent_button{
+    display:flex;
+    justify-content:center;
+}
+
+#userconsent_button1,#userconsent_button2{
+    margin:0px 10px;
+}
+
+/* 必須項目表示 */
+.required{
+    padding:3px;
+    font-weight:bold;
+    font-size:75%;
+    color:white;
+    background-color:red;
+    border-radius:10px;
+}
+
+button:hover{
+    cursor:pointer;
+}
+
+/* ==========テーブル系======================================== */
+table{
+    border-collapse:collapse; /*table内の線を一体化する*/
+    width:80%;
+    margin:0 auto;
+}
+
+th,td{
+    border:solid 1px;
+    padding:10px;
+}
+
+th{
+
+}
+
+img{
+    max-width:100%
+    height:auto;
+}
+
+/* ==========その他======================================== */
+
+/* usercreate.htmlの個人情報利用目的box用 */
+.inline_box{
+    margin:0 auto;
+    width:50%;
+    height:100px;
+    overflow:auto;/*スクロールバー表示*/
+    border:2px solid;
+}
+
+.hidden{
+    display:none;
+}
+
+/* ==========ヘッダー、フッター系======================================== */
+
+header{
+    background-color:white;
+    max-width:100%
+}
+
+header h1{
+    padding:10px 0px 10px 20px;
+    font-family:"Sawarabi Mincho", serif;
+    font-weight:400;
+    font-style:normal;
+}
+
+.header_item{
+    margin-right:5px;
+}
+
+.header_button{
+     margin-right:5px;
+     border:none;
+     background-color:white;
+ }
+ .header_button:hover{
+    font-weight:bold;
+  }
+
+.backpage:hover{
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.header_username{
+    margin-right:10px;
+    border-bottom:1px solid;
+}
+
+/* ヘッダーに下線を引く */
+.border_header{
+    border-bottom:solid;
+    border-color:#FFCC99;
+    border-width:5px;
+}
+
+footer{
+    position:absolute;/*相対位置に対してのfooterの絶対位置*/
+    bottom:0;/*下部に固定*/
+    width:100%;
+    margin-bottom:-200px;/*bodyと重ねない*/
+    padding-top:30px;
+    text-align:center;
+    background-color:#EEEEEE;
+}
+
+/* ==========クライアント使用端末サイズ系======================================== */
+
+/* タブレットサイズ */
+@media screen and (max-width: 768px) {
+    .login_body_h2{
+        font-size:20px;
+    }
+ }
+
+/* スマホサイズ */
+@media screen and (max-width:480px){
+    header h1{
+        padding:5px 0px 5px 10px;
+    }
+
+    .login_body_h2{
+        font-size:10px;
+    }
+
+    .login_body_h2 label{
+        margin:5px;
+    }
+
+    /* usercreate.htmlの個人情報利用目的box用 */
+    .inline_box{
+        width:80%;
+    }
+
+    /* ユーザ入力ページの入力例表示 */
+    .example{
+        font-size:12px;
+    }
+}
